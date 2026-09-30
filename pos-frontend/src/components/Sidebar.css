@@ -1,0 +1,133 @@
+.sidebar {
+  width: 250px;
+  background-color: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  position: relative;
+}
+
+.logo-circle span:nth-child(1) {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  font-size: 14px;
+}
+
+.logo-circle span:nth-child(2) {
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  font-size: 14px;
+}
+
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 16px;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #cbd5e1;
+}
+
+.profile-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.profile-role {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.sidebar-logo h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  padding: 12px 24px;
+  text-decoration: none;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.nav-item.active {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  padding: 24px;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logout-btn:hover {
+  color: #dc2626;
+}
