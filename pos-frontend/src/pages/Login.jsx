@@ -91,9 +91,7 @@ const Login = ({ onLogin }) => {
           </button>
         </form>
 
-        <div className="login-footer">
-          Point of Sale System &copy; {new Date().getFullYear()}
-        </div>
+
       </div>
     </div>
   );

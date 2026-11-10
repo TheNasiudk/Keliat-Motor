@@ -10,7 +10,10 @@ const Kasir = () => {
   const currentUser = JSON.parse(sessionStorage.getItem('user')) || {};
   const [barcode, setBarcode] = useState(() => localStorage.getItem('kasir_barcode') || '');
   const [qty, setQty] = useState(() => localStorage.getItem('kasir_qty') || '');
-  const [metodePembayaran, setMetodePembayaran] = useState(() => localStorage.getItem('kasir_metodePembayaran') || 'Tunai');
+  const [metodePembayaran, setMetodePembayaran] = useState(() => {
+    const savedMethod = localStorage.getItem('kasir_metodePembayaran');
+    return savedMethod === 'QRIS / Transfer' ? 'QRIS' : savedMethod || 'Tunai';
+  });
   const [tunai, setTunai] = useState(() => localStorage.getItem('kasir_tunai') || '');
   const [biayaJasa, setBiayaJasa] = useState(() => localStorage.getItem('kasir_biayaJasa') || '');
   const [catatan, setCatatan] = useState(() => localStorage.getItem('kasir_catatan') || '');
@@ -131,7 +134,7 @@ const Kasir = () => {
     const isTunai = metodePembayaran === 'Tunai';
 
     if (!isTunai && !buktiFile) {
-      alert('Bukti pembayaran wajib diunggah untuk metode QRIS / Transfer!');
+      alert('Bukti pembayaran wajib diunggah untuk metode QRIS atau Transfer!');
       return;
     }
 
@@ -352,7 +355,8 @@ const Kasir = () => {
               <label style={{ display: 'block', fontWeight: '600', fontSize: '13px', color: '#1e293b', marginBottom: '6px' }}>Metode Pembayaran</label>
               <select className="form-control" value={metodePembayaran} onChange={(e) => setMetodePembayaran(e.target.value)}>
                 <option value="Tunai">Tunai</option>
-                <option value="QRIS / Transfer">QRIS / Transfer</option>
+                <option value="QRIS">QRIS</option>
+                <option value="Transfer">Transfer</option>
               </select>
             </div>
 

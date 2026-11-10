@@ -390,6 +390,14 @@ app.get('/api/laporan/dashboard', async (req, res) => {
             WHERE t.tanggal_transaksi >= ? AND t.tanggal_transaksi < ?
         `, [periodStart, nextPeriodStart]);
 
+                const [labaHariIniRows] = await db.query(`
+                        SELECT COALESCE(SUM(dt.subtotal - (dt.qty * dt.harga_beli_historis)), 0) as laba_kotor_hari_ini
+                        FROM detail_transaksi dt
+                        JOIN transaksi t ON dt.id_transaksi = t.id_transaksi
+                        WHERE t.tanggal_transaksi >= CURDATE()
+                            AND t.tanggal_transaksi < CURDATE() + INTERVAL 1 DAY
+                `);
+
         const [topBarangRows] = await db.query(`
             SELECT
                 sc.kode_item,
@@ -409,7 +417,8 @@ app.get('/api/laporan/dashboard', async (req, res) => {
             total_transaksi: metrikRows[0].total_transaksi || 0,
             total_pendapatan: metrikRows[0].total_pendapatan || 0,
             total_pengeluaran: pengeluaranRows[0].total_pengeluaran || 0,
-            laba_kotor: labaRows[0].laba_kotor || 0
+            laba_kotor: labaRows[0].laba_kotor || 0,
+            laba_kotor_hari_ini: labaHariIniRows[0].laba_kotor_hari_ini
         };
 
         // 2. Data grafik harian, termasuk tanggal yang hanya memiliki pengeluaran.
